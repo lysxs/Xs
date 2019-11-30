@@ -1,0 +1,42 @@
+useradd hadoop
+passwd hadoop
+vim /etc/sudoers	#在root ALL=(ALL) ALL下面加上一行hadoop ALL=(ALL) ALL
+vim /etc/sysconfig/network	#修改主机名
+sudo vim /etc/hosts
+reboot	#重启
+切换到自己的用户
+ssh-keygen -t rsa	#生成ssh秘钥
+cd .ssh/
+ls
+cat id_rsa.pub >> authorized_keys
+sudo chmod 600 authorized_keys
+ssh 主机名	#验证
+mkdir softs	#新建softs文件
+复制jdk压缩包、hadoop压缩包到softs文件夹中
+tar -zxvf softs/jdk-7u79-linux-x64.tar.gz	#解压
+tar -zxvf softs/hadoop-2.5.0-cdh5.3.6	#解压
+vim ~/.bash_profile	#JAVA_HOME, CLASSPATH, PATH
+source ~/.bash_profile	
+hadoop version	#验证hadoop
+复制替换配置文件
+修改配置文件
+cd hadoop-2.5.0-cdh5.3.6
+mkdir hdfs
+hadoop namenode -format
+start-dfs.sh
+start-yarn.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
